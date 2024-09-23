@@ -87,7 +87,8 @@ public class Main {
             System.out.println("\nAdministrator Menu:");
             System.out.println("1. Add User");
             System.out.println("2. List Users");
-            System.out.println("3. Log Out");
+            System.out.println("3. Remove User");
+            System.out.println("4. Log Out");
             System.out.print("Choose an option: ");
             int option = scanner.nextInt();
             scanner.nextLine();  // Consumir el salto de línea
@@ -98,7 +99,6 @@ public class Main {
                     String name = scanner.nextLine();
                     System.out.print("Enter the new user's role (Programmer/Manager): ");
                     String role = scanner.nextLine();
-
                     admin.addUser(users, name, role); // Pasar la lista global de usuarios
                     break;
 
@@ -110,6 +110,12 @@ public class Main {
                     break;
 
                 case 3:
+                    System.out.print("Enter the name of the user to remove: ");
+                    String removeName = scanner.nextLine();
+                    admin.removeUser(users, removeName);
+                    break;
+
+                case 4:
                     running = false; // Cerrar sesión
                     break;
 
@@ -245,5 +251,6 @@ public class Main {
         return null; // Devolver null si no se encuentra el proyecto
     }
 }
+
 
 

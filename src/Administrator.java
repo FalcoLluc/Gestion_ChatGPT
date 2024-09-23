@@ -6,30 +6,44 @@ public class Administrator extends User {
         super(name, RoleNames.ADMINISTRATOR);
     }
 
-    //Método para agregar un usuario a la lista global de usuarios
+    // Método para agregar un nuevo usuario
     public void addUser(List<User> users, String name, String role) {
-        // Dependiendo del rol, se crea un objeto de tipo Programmer o Manager
-        User newUser;
         if (role.equalsIgnoreCase(RoleNames.PROGRAMMER)) {
-            newUser = new Programmer(name);
+            users.add(new Programmer(name));
+            System.out.println("Programmer " + name + " added successfully.");
         } else if (role.equalsIgnoreCase(RoleNames.MANAGER)) {
-            newUser = new Manager(name);
+            users.add(new Manager(name));
+            System.out.println("Manager " + name + " added successfully.");
         } else {
-            System.out.println("Invalid role. User not created.");
-            return;
+            System.out.println("Invalid role. No user added.");
         }
-
-        // Agregar el nuevo usuario a la lista global de usuarios
-        users.add(newUser);
-        System.out.println("User " + name + " with role " + role + " created successfully.");
     }
 
-    // Método para mostrar los permisos del administrador
+    // Nuevo método para eliminar un usuario
+    public void removeUser(List<User> users, String name) {
+        User userToRemove = null;
+        for (User user : users) {
+            if (user.getName().equalsIgnoreCase(name)) {
+                userToRemove = user;
+                break;
+            }
+        }
+        if (userToRemove != null && !(userToRemove instanceof Administrator)) {
+            users.remove(userToRemove);
+            System.out.println("User " + name + " removed successfully.");
+        } else if (userToRemove instanceof Administrator) {
+            System.out.println("Cannot remove an Administrator.");
+        } else {
+            System.out.println("User not found.");
+        }
+    }
+
     @Override
     public void displayRolePermissions() {
-        System.out.println("Administrator Permissions: Manage users, manage projects.");
+        System.out.println("Administrator Permissions: Manage users, view all data.");
     }
 }
+
 
 
 
