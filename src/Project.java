@@ -33,6 +33,11 @@ public class Project {
         tasks.add(task);
     }
 
+    // Get the list of tasks
+    public List<Task> getTasks() {
+        return tasks;
+    }
+
     // List all programmers on the project
     public void listProgrammers() {
         for (Programmer programmer : programmers) {
@@ -47,5 +52,6 @@ public class Project {
         }
     }
 }
+
 
 
