@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner; // Asegúrate de importar Scanner
 
 public class Programmer extends User {
     private List<Project> assignedProjects;
@@ -30,30 +31,54 @@ public class Programmer extends User {
 
     // List all assigned tasks
     public void listAssignedTasks() {
-        for (Task task : assignedTasks) {
-            System.out.println(task.getDescription() + " (Completed: " + task.isCompleted() + ")");
+        if (assignedTasks.isEmpty()) {
+            System.out.println("No tasks assigned.");
+            return;
+        }
+        for (int i = 0; i < assignedTasks.size(); i++) {
+            Task task = assignedTasks.get(i);
+            System.out.println((i + 1) + ". " + task.getDescription() + " (Completed: " + task.isCompleted() + ")");
         }
     }
 
-    // Find a task by its description
-    public Task findTaskByDescription(String description) {
+    // Mark a task as completed by selecting its number
+    public void markTaskAsCompleted() {
+        List<Task> incompleteTasks = new ArrayList<>();
+
+        // Collect only incomplete tasks
         for (Task task : assignedTasks) {
-            if (task.getDescription().equalsIgnoreCase(description)) {
-                return task;
+            if (!task.isCompleted()) {
+                incompleteTasks.add(task);
             }
         }
-        return null; // Return null if not found
-    }
 
-    // Mark a task as completed
-    public void markTaskAsCompleted(String description) {
-        Task task = findTaskByDescription(description);
-        if (task != null) {
-            task.setCompleted(true);
-            System.out.println("Task marked as completed.");
-        } else {
-            System.out.println("Task not found.");
+        if (incompleteTasks.isEmpty()) {
+            System.out.println("No incomplete tasks to mark as completed.");
+            return;
         }
+
+        // List incomplete tasks
+        System.out.println("Incomplete Tasks:");
+        for (int i = 0; i < incompleteTasks.size(); i++) {
+            Task task = incompleteTasks.get(i);
+            System.out.println((i + 1) + ". " + task.getDescription());
+        }
+
+        // User selects task to mark as completed
+        System.out.print("Enter the task number to mark as completed: ");
+
+        Scanner scanner = new Scanner(System.in);
+        int taskNumber = scanner.nextInt();
+        scanner.nextLine();  // Consume the newline
+
+        if (taskNumber < 1 || taskNumber > incompleteTasks.size()) {
+            System.out.println("Invalid task number.");
+            return;
+        }
+
+        Task taskToComplete = incompleteTasks.get(taskNumber - 1);
+        taskToComplete.setCompleted(true);
+        System.out.println("Task '" + taskToComplete.getDescription() + "' marked as completed.");
     }
 
     @Override
@@ -61,5 +86,8 @@ public class Programmer extends User {
         System.out.println("Programmer Permissions: View projects, manage tasks.");
     }
 }
+
+
+
 
 

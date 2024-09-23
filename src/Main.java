@@ -161,21 +161,11 @@ public class Main {
                         break;
 
                     case 2:
-                        // Mostrar tareas y proyectos a los que pertenecen
-                        System.out.println("Assigned Tasks:");
-                        for (Project project : projects) {
-                            for (Task task : project.getTasks()) {
-                                if (task.getProgrammer().equals(programmer)) {
-                                    System.out.println("Task: " + task.getDescription() + " (Project: " + project.getName() + ")");
-                                }
-                            }
-                        }
+                        programmer.listAssignedTasks();
                         break;
 
                     case 3:
-                        System.out.print("Enter the task description to mark as completed: ");
-                        String taskDesc = scanner.nextLine();
-                        programmer.markTaskAsCompleted(taskDesc);
+                        programmer.markTaskAsCompleted();
                         break;
 
                     case 4:

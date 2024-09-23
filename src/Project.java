@@ -18,34 +18,28 @@ public class Project {
         return name;
     }
 
-    // Set or change the manager
-    public void setManager(Manager manager) {
-        this.manager = manager;
+    public List<Programmer> getProgrammers() {
+        return programmers;
     }
 
-    // Add a programmer to the project
     public void addProgrammer(Programmer programmer) {
         programmers.add(programmer);
     }
 
-    // Add a task to the project
     public void addTask(Task task) {
         tasks.add(task);
     }
 
-    // Get the list of tasks
     public List<Task> getTasks() {
         return tasks;
     }
 
-    // List all programmers on the project
     public void listProgrammers() {
         for (Programmer programmer : programmers) {
             System.out.println(programmer.getName());
         }
     }
 
-    // List all tasks in the project
     public void listTasks() {
         for (Task task : tasks) {
             System.out.println(task.getDescription() + " (Completed: " + task.isCompleted() + ")");
